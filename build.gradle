@@ -1,0 +1,59 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		jcenter()
+        maven {
+			url "https://dl.bintray.com/basecrm/maven"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.franzbecker:gradle-lombok:1.8"
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+	id 'io.franzbecker.gradle-lombok' version '1.8'
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.franzbecker.gradle-lombok"
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+    jcenter()
+    maven {
+        url  "https://dl.bintray.com/basecrm/maven"
+    }
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.retry:spring-retry')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.codehaus.groovy:groovy-all:2.4.3'
+    compile('com.getbase:basecrm-java:1.4.5')
+	runtime('com.h2database:h2')
+	runtime('mysql:mysql-connector-java')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
+	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-3'
+	testCompile 'cglib:cglib-nodep:3.2.4'
+    testCompile('com.jayway.awaitility:awaitility:1.7.0')
+}
